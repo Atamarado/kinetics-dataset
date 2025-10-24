@@ -15,7 +15,8 @@ SPLITS = ['test', 'train', 'val']
 
 def load_label(csv):
     table = np.loadtxt(csv, skiprows=1, dtype=str, delimiter=',')
-    return {k: v.replace('"', '') for k, v in zip(table[:, 1], table[:, 0])}
+    return {k: v.replace('"', '').replace(' ', '_').replace("'", "").replace('(', '').replace(')', '')
+            for k, v in zip(table[:, 1], table[:, 0])}
 
 def collect_dict(path, split, replace_videos):
     split_video_path = path / split
